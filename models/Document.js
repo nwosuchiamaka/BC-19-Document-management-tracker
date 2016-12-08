@@ -84,32 +84,32 @@ const Document = function(firebase){
         },
 
         getDocumentBykeyWord: function(keyword, callback){
+            keyword = keyword.toLowerCase();
             var filteredDocuments = [];
             database.ref('documents').once('value', function(documents){
                 var documentsValues = documents.val();
                 for(var i in documentsValues) {
                     if(documentsValues.hasOwnProperty(i)){
-                        if( documentsValues[i].keyword == keyword ){
+                        if( documentsValues[i].keyword.trim().toLowerCase() == keyword ){
                             filteredDocuments.push(documentsValues[i]);
                         }
                     }
-
                 }
                 callback(filteredDocuments);
             });
         },
 
         getDocumentByTitle: function(title, callback){
+            title = title.toLowerCase();
             var filteredDocuments = [];
             database.ref('documents').once('value', function(documents){
                 var documentsValues = documents.val();
                 for(var i in documentsValues) {
                     if(documentsValues.hasOwnProperty(i)){
-                        if( documentsValues[i].title == title ){
+                        if( documentsValues[i].title.trim().toLowerCase() == title ){
                             filteredDocuments.push(documentsValues[i]);
                         }
                     }
-
                 }
                 callback(filteredDocuments);
             });
@@ -119,6 +119,22 @@ const Document = function(firebase){
             database.ref('documents/'+ documentId).once('value', function(documents){
                 var documentsValues = documents.val();
                 callback(documentsValues);
+            });
+        },
+
+        getDocumentByOwner: function(owner, callback){
+            owner = owner.toLowerCase();
+            var filteredDocuments = [];
+            database.ref('documents').once('value', function(documents){
+                var documentsValues = documents.val();
+                for(var i in documentsValues) {
+                    if(documentsValues.hasOwnProperty(i)){
+                        if( documentsValues[i].owner.trim().toLowerCase() == owner ){
+                            filteredDocuments.push(documentsValues[i]);
+                        }
+                    }
+                }
+                callback(filteredDocuments);
             });
         },
 
@@ -136,6 +152,22 @@ const Document = function(firebase){
                 }
                 callback(false);
             });
+        },
+
+        filterModel: function (filter, search, callback) {
+
+            if(filter === 'title') {
+                this.getDocumentByTitle(search, callback);
+            }
+
+            if(filter === 'keyword') {
+                this.getDocumentBykeyWord(search, callback);
+            }
+
+            if(filter === 'owner') {
+                this.getDocumentByOwner(search, callback);
+            }
+
         },
 
         deleteDocument: function(documentId){
