@@ -123,7 +123,7 @@ app.get('/search', function(req, res){
         res.redirect('/');
     }
 
-    if(req.query.department){
+    if (req.query.department) {
         docModel.getDocumentByDepartment(req.query.department, function(result) {
             console.log(result);
             res.render('pages/search', {
@@ -131,6 +131,15 @@ app.get('/search', function(req, res){
                 searchValue: req.query.department,
                 documents: result
             });
+        });
+    } else if(req.query.filter) {
+        docModel.filterModel(req.query.filter, req.query.search, function(result) {
+           console.log('Result from filter', result);
+           res.render('pages/search', {
+               user: req.session.userData,
+               searchValue: req.query.search,
+               documents: result
+           });
         });
     }else{
         res.render('pages/search', {user: req.session.userData, searchValue: '', documents:[]});
