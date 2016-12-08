@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+</head>
+<body>
+<header>
+    <% include ../partials/header.ejs %>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 align="center" class="text-muted">
+                <strong>
+                    Create Account
+                </strong>
+            </h3>
+            <br/><br/><br/>
+            <% if(message){ %>
+            <p class="text-center text-danger"><%= message %></p>
+            <%}%>
+            <form method="post" action="" class="form-horizontal">
+                <fieldset>
+
+                    <div class="form-group <%= (errors[0] ? 'has-error': '') %> label-floating">
+                        <label for="fullName" class="control-label">Full name:</label>
+                        <input type="text" name="fullname" class="form-control" id="fullName">
+                        <span class="help-block"> <%= errors[0] %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[1] ? 'has-error': '') %> label-floating">
+                        <label for="userName" class="control-label">Username:</label>
+                        <input type="text" name="username" class="form-control" id="userName">
+                        <span class="help-block"> <%= errors[1] %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[2] ? 'has-error': '') %> label-floating">
+                        <label for="email" class="control-label">Email:</label>
+                        <input type="email" name="email" class="form-control" id="email">
+                        <span class="help-block"> <%= errors[2] %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[3] ? 'has-error': '') %> label-floating">
+                        <label for="password" class="control-label">Password:</label>
+                        <input type="password" name="password" class="form-control" id="email">
+                        <span class="help-block"> <%= errors[3] %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[4] ? 'has-error': '') %> label-floating">
+                        <label for="confirmPassword" class="control-label">Confirm password:</label>
+                        <input type="password" name="confirmpassword" class="form-control" id="confirmPassword">
+                        <span class="help-block"> <%= errors[4] %> </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-block">Sign up</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+            <br/><br/><br/>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <% include ../partials/footer.ejs %>
+</footer>
+</body>
+
+</html>
