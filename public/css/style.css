@@ -1,0 +1,33 @@
+/*Block for dashboard*/
+footer{
+    position: fixed;
+    text-align: center;
+    background: #c5c5c5;
+    padding: 15px;
+    margin: auto;
+    width: 100%;
+    bottom: 0;
+}
+
+#categories li, #document-lists{
+    list-style: none;
+    padding: 10px;
+    border-bottom: 2px solid rgb(200,200,200);
+}
+
+a, a:hover, a:active{
+    text-decoration: none;
+}
+
+#add-document{
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+    padding: 10px;
+    color: #525252;
+}
+#search-form{
+    margin-top: -10px;
+    display: inline-block;
+    float: right;
+}
