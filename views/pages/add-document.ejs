@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head.ejs %>
+</head>
+<body>
+<header>
+    <div class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">DocTracker</a>
+            </div>
+            <div class="navbar-collapse collapse navbar-responsive-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#"> Welcome <%= user.fullname%> </a>
+                    </li>
+
+                    <li>
+                        <a href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <!--Welcome to dashboard < % = fullname % >-->
+        <div class="col-md-6 col-md-offset-3">
+            <h3 align="center" class="text-muted">
+                <strong>
+                    Add new document
+                </strong>
+            </h3>
+            <br/><br/><br/>
+
+            <% if(message){ %>
+                <p class="text-center text-danger"><%= message %></p>
+            <%}%>
+
+            <form id="login-form" method="post" action="" class="form-horizontal">
+                <fieldset>
+
+                    <div class="form-group <%= (errors[0] ? 'has-error': '') %> label-floating">
+                        <label for="inputEmail" class="control-label">Document title:</label>
+                        <input type="text" name="title" class="form-control" id="inputEmail">
+                        <span class="help-block"> <%= (errors[0] ? errors[0]: '') %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[1] ? 'has-error': '') %> label-floating">
+                        <label for="inputPassword" class="control-label">Document link:</label>
+                        <input type="url" name="link" class="form-control" id="inputPassword">
+                        <span class="help-block"> <%= (errors[1] ? errors[1]: '') %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[2] ? 'has-error': '') %> label-floating">
+                        <label for="inputPassword" class="control-label">Keyword:</label>
+                        <input type="text" name="keyword" class="form-control" id="inputPassword">
+                        <span class="help-block"> <%= (errors[2] ? errors[2]: '') %> </span>
+                    </div>
+
+                    <div class="form-group <%= (errors[3] ? 'has-error': '') %> label-floating">
+                        <label for="inputPassword" class="control-label">Document department:</label>
+                        <select id="document-category" name="department" class="form-control">
+                            <option value=""></option>
+                            <option value="Success">Success</option>
+                            <option value="Recruitment">Recruitment</option>
+                            <option value="Sales">Sales</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Training">Training</option>
+                        </select>
+                        <span class="help-block"> <%= (errors[3] ? errors[3]: '') %> </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" id="login-submit" class="btn btn-primary">
+                               <i class="glyphicon glyphicon-floppy-disk"></i> Save in repo
+                            </button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <% include ../partials/footer.ejs %>
+</footer>
+</body>
+
+</html>
