@@ -32,7 +32,7 @@ const Document = function(firebase){
                             keyword : keyword,
                             department: department,
                             owner: ownerName,
-                            date: new Date()
+                            dateCreated: new Date().toDateString()
                         })
                           .then(function(){
                             callback({
