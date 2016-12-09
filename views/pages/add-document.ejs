@@ -20,6 +20,11 @@
                     <li>
                         <a href="#"> Welcome <%= user.fullname%> </a>
                     </li>
+                    <li>
+                        <a href="/search?search=<%= user.fullname%>&filter=owner">
+                            My documents
+                        </a>
+                    </li>
 
                     <li>
                         <a href="/logout">Logout</a>

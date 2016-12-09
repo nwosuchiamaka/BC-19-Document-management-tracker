@@ -90,6 +90,7 @@ const Document = function(firebase){
                 var documentsValues = documents.val();
                 for(var i in documentsValues) {
                     if(documentsValues.hasOwnProperty(i)){
+                        documentsValues[i].id = i;
                         if( documentsValues[i].keyword.trim().toLowerCase() == keyword ){
                             filteredDocuments.push(documentsValues[i]);
                         }
@@ -106,6 +107,7 @@ const Document = function(firebase){
                 var documentsValues = documents.val();
                 for(var i in documentsValues) {
                     if(documentsValues.hasOwnProperty(i)){
+                        documentsValues[i].id = i;
                         if( documentsValues[i].title.trim().toLowerCase() == title ){
                             filteredDocuments.push(documentsValues[i]);
                         }
@@ -129,7 +131,25 @@ const Document = function(firebase){
                 var documentsValues = documents.val();
                 for(var i in documentsValues) {
                     if(documentsValues.hasOwnProperty(i)){
+                        documentsValues[i].id = i;
                         if( documentsValues[i].owner.trim().toLowerCase() == owner ){
+                            filteredDocuments.push(documentsValues[i]);
+                        }
+                    }
+                }
+                callback(filteredDocuments);
+            });
+        },       
+        
+        getDocumentByDate: function(date, callback){
+            date = date.toLowerCase();
+            var filteredDocuments = [];
+            database.ref('documents').once('value', function(documents){
+                var documentsValues = documents.val();
+                for(var i in documentsValues) {
+                    if(documentsValues.hasOwnProperty(i)){
+                        documentsValues[i].id = i;
+                        if( documentsValues[i].dateCreated.trim().toLowerCase() == date ){
                             filteredDocuments.push(documentsValues[i]);
                         }
                     }
@@ -143,6 +163,7 @@ const Document = function(firebase){
                 var documentsValues = documents.val();
                 for(var i in documentsValues) {
                     if(documentsValues.hasOwnProperty(i)){
+                        documentsValues[i].id = i;
                         if( documentsValues[i].title == title || documentsValues[i].link == link ){
                             callback(true, i, documentsValues[i] );
                             return;
@@ -166,6 +187,10 @@ const Document = function(firebase){
 
             if(filter === 'owner') {
                 this.getDocumentByOwner(search, callback);
+            }
+
+            if(filter === 'date'){
+                this.getDocumentByDate(search, callback);
             }
 
         },
